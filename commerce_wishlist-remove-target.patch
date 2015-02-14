@@ -1,0 +1,12 @@
+diff --git a/commerce_wishlist.module b/commerce_wishlist.module
+index 3c2dba4..9171342 100644
+--- a/commerce_wishlist.module
++++ b/commerce_wishlist.module
+@@ -349,7 +349,7 @@ function commerce_wishlist_add_product($fields) {
+  * Returns html of "Already in wishlist" link. TODO: themeable?
+  */
+ function _commerce_wishlist_link($uid) {
+-  return t('Already in <a class="in-wishlist" target="_blank" href="@url">wishlist</a>', array(
++  return t('Already in <a class="in-wishlist" href="@url">wishlist</a>', array(
+     '@url' => url('user/' . $uid . '/wishlist')));
+ }
