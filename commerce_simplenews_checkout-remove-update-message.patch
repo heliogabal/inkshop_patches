@@ -1,0 +1,17 @@
+diff --git a/commerce_simplenews_checkout.module b/commerce_simplenews_checkout.module
+index 78eb814..d0a127d 100644
+--- a/commerce_simplenews_checkout.module
++++ b/commerce_simplenews_checkout.module
+@@ -152,7 +152,7 @@ function commerce_simplenews_checkout_pane_checkout_form_submit($form, &$form_st
+         }
+       }
+       if (isset($order->uid) && $user->uid == $order->uid) {
+-        drupal_set_message(t('Your newsletter subscriptions have been updated.'));
++        //drupal_set_message(t('Your newsletter subscriptions have been updated.'));
+       }
+       else {
+         drupal_set_message(t('The newsletter subscriptions for user %account have been updated.', array('%account' => $account->name)));
+@@ -160,3 +160,4 @@ function commerce_simplenews_checkout_pane_checkout_form_submit($form, &$form_st
+     }
+   }
+ }
