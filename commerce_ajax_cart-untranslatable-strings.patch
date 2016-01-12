@@ -1,0 +1,71 @@
+From 7a7980cd727fd4da771f1e125f453f6592f73483 Mon Sep 17 00:00:00 2001
+From: git
+Date: Thu, 18 Dec 2014 18:50:52 -0800
+Subject: Issue #2364169 by jlcerrada, joelpittet: Untranslatable strings
+
+---
+ commerce_ajax_cart.admin.inc | 4 ++--
+ commerce_ajax_cart.module    | 4 ++--
+ js/commerce_ajax_cart.js     | 2 +-
+ 3 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/commerce_ajax_cart.admin.inc b/commerce_ajax_cart.admin.inc
+index 4764912..a93b975 100644
+--- a/commerce_ajax_cart.admin.inc
++++ b/commerce_ajax_cart.admin.inc
+@@ -23,7 +23,7 @@ function commerce_ajax_cart_settings_form() {
+     '#type' => 'fieldset',
+     '#tree' => TRUE,
+     '#title' => t('Positioning of cart preview'),
+-    '#description' => t('For futher information, <a target="_blank" href="http://api.jqueryui.com/position/">read documentation</a> for jquery_ui position.'),
++    '#description' => t('For futher information, <a target="_blank" href="@url">read documentation</a> for jquery_ui position.', array('@url' => 'http://api.jqueryui.com/position/')),
+   );
+   $form['position']['my'] = array(
+     '#type' => 'textfield',
+@@ -44,7 +44,7 @@ function commerce_ajax_cart_settings_form() {
+   $form['empty'] = array(
+     '#type' => 'textfield',
+     '#title' => t('Empty cart text'),
+-    '#default_value' => variable_get('commerce_ajax_cart_text', 'There is no product in your cart'),
++    '#default_value' => variable_get('commerce_ajax_cart_text', t('There is no product in your cart')),
+   );
+ 
+   $form['view'] = array(
+diff --git a/commerce_ajax_cart.module b/commerce_ajax_cart.module
+index 1746d7c..356a216 100644
+--- a/commerce_ajax_cart.module
++++ b/commerce_ajax_cart.module
+@@ -148,7 +148,7 @@ function commerce_ajax_cart_show_contents() {
+     $view->set_arguments(array($cart_id));
+     $output = $view->execute_display();
+     if (!$view->result || count($view->result) == 0) {
+-      $output = '<div class="empty-cart">' . variable_get('commerce_ajax_cart_text', 'There is no product in your cart') . '</div>';
++      $output = '<div class="empty-cart">' . variable_get('commerce_ajax_cart_text', t('There is no product in your cart')) . '</div>';
+     }
+     cache_set($cid, $output, 'cache', CACHE_TEMPORARY);
+     print $output;
+@@ -268,7 +268,7 @@ function commerce_ajax_cart_generate_cache($cart_id) {
+   $view->set_arguments(array($cart_id));
+   $output = $view->execute_display();
+   if (!$view->result || count($view->result) == 0) {
+-    $output = '<div class="empty-cart">' . variable_get('commerce_ajax_cart_text', 'There is no product in your cart') . '</div>';
++    $output = '<div class="empty-cart">' . variable_get('commerce_ajax_cart_text', t('There is no product in your cart')) . '</div>';
+   }
+   cache_set($cid, $output, 'cache', CACHE_TEMPORARY);
+ }
+diff --git a/js/commerce_ajax_cart.js b/js/commerce_ajax_cart.js
+index 8915fe4..1243c68 100644
+--- a/js/commerce_ajax_cart.js
++++ b/js/commerce_ajax_cart.js
+@@ -66,7 +66,7 @@
+         if ($('#commerce-ajax-cart-preview').length > 0) return;
+ 
+         /** Append div container **/
+-        $(this).append('<div class="loading" id="commerce-ajax-cart-preview"><span>Loading</</div>');
++        $(this).append('<div class="loading" id="commerce-ajax-cart-preview"><span>' + Drupal.t('Loading') + '</</div>');
+ 
+         /** Set position for cart preview with jquery.ui.position **/
+         // $('#commerce-ajax-cart-preview').position(options);
+-- 
+cgit v0.11.2
+
